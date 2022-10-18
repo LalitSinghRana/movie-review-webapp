@@ -1,10 +1,13 @@
 import express from 'express';
+import { Request } from 'express';
+import cors from 'cors';
 import dbConnection from './database/Config';
 import movieRoutes from './routes/movie-routes';
 import reviewRoutes from './routes/review-routes';
 
 const app = express();
 
+app.use(cors<Request>());
 app.use(express.json());
 app.use('/movie', movieRoutes);
 app.use('/review', reviewRoutes);
@@ -19,3 +22,4 @@ const PORT = 5000;
 app.listen(PORT, () => {
 	console.log(`listening on port ${PORT}`);
 });
+

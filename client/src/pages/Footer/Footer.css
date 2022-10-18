@@ -1,0 +1,9 @@
+.footer {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    align-items: center;
+    background-color: greenyellow;
+    max-height: 200px;
+    padding: 0 16px;
+}
