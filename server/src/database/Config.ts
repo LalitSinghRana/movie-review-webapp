@@ -7,7 +7,7 @@ const dbConnection = new Sequelize({
 	host: 'localhost',
 	username: 'root',
 	password: 'root',
-	database: 'movie-review-site-ts',
+	database: 'movie-review-site',
 	logging: false,
 	models: [Movie, Review],
 });
