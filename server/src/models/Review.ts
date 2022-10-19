@@ -33,7 +33,7 @@ class Review extends Model {
 	Rating: number;
 
 	@Column({
-		type: DataType.STRING,
+		type: DataType.TEXT,
 		allowNull: false,
 	})
 	Review_Comments: string;

@@ -2,24 +2,31 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Header.css';
 import MovieType from '../../../../server/src/models/Movie';
+import { useNavigate } from 'react-router-dom';
 
 const Header: React.FC<{ movies: MovieType[] }> = ({ movies }) => {
 	const [movieModal, setMovieModal] = useState(false);
+	const navigate = useNavigate();
 
 	const toggleMovieModal = () => {
 		setMovieModal(!movieModal);
 	};
 
 	const addNewMovie = async () => {
-    let tempMovie = {
-			Name: (document.getElementById('movieName')! as HTMLInputElement).value,
-			Release_Date: (
-				document.getElementById('releaseDate')! as HTMLInputElement
-			).value,
-		};
+		const movieName = document.getElementById('movieName') as HTMLInputElement;
+		const releaseDate = document.getElementById(
+			'releaseDate'
+		) as HTMLInputElement;
 
-		toggleMovieModal();
-		await axios.post('http://localhost:5000/movie/add', tempMovie);
+		if (movieName && releaseDate && movieName.value && releaseDate.value) {
+			let tempMovie = {
+				Name: movieName.value,
+				Release_Date: releaseDate.value,
+			};
+
+			toggleMovieModal();
+			await axios.post('http://localhost:5000/movie/add', tempMovie);
+		}
 	};
 
 	const [reviewModal, setReviewModal] = useState(false);
@@ -29,22 +36,38 @@ const Header: React.FC<{ movies: MovieType[] }> = ({ movies }) => {
 	};
 
 	const addNewReview = async () => {
-		let tempReview = {
-			Reviewer_Name: (
-				document.getElementById('reviewerName')! as HTMLInputElement
-			).value,
-			Rating: (document.getElementById('rating')! as HTMLInputElement).value,
-			Review_Comments: (document.getElementById('reviewComments')! as HTMLInputElement).value,
-			Movie_Id: (document.getElementById('selectMovie')! as HTMLInputElement).value,
-		};
+		const reviewerName = document.getElementById(
+			'reviewerName'
+		) as HTMLInputElement;
+		const rating = document.getElementById('rating') as HTMLInputElement;
+		const reviewComments = document.getElementById(
+			'reviewComments'
+		) as HTMLInputElement;
+		const selectMovie = document.getElementById(
+			'selectMovie'
+		) as HTMLInputElement;
 
-		toggleReviewModal();
-		await axios.post('http://localhost:5000/review/add', tempReview);
+		if (
+			reviewerName &&
+			rating &&
+			reviewComments &&
+			selectMovie &&
+			rating.value &&
+			reviewComments.value &&
+			selectMovie.value &&
+			selectMovie.value !== '0'
+		) {
+			let tempReview = {
+				Reviewer_Name: rating.value,
+				Rating: rating.value,
+				Review_Comments: reviewComments.value,
+				Movie_Id: selectMovie.value,
+			};
+
+			toggleReviewModal();
+			await axios.post('http://localhost:5000/review/add', tempReview);
+		}
 	};
-
-	// const selectHandler = () => {
-	//   console.log(document.getElementById("selectMovie").value);
-	// };
 
 	useEffect(() => {
 		if (reviewModal) {
@@ -61,7 +84,7 @@ const Header: React.FC<{ movies: MovieType[] }> = ({ movies }) => {
 
 	return (
 		<div className='header'>
-			<h2>MOVIECRITIC</h2>
+			<h2 onClick={() => navigate('/')}>MOVIECRITIC</h2>
 			<div>
 				<button onClick={toggleMovieModal}>Add new movie</button>
 
@@ -70,8 +93,13 @@ const Header: React.FC<{ movies: MovieType[] }> = ({ movies }) => {
 						<div onClick={toggleMovieModal} className='overlay'></div>
 						<div className='modal-content'>
 							<h2>Add new movie</h2>
-							<input type='text' id='movieName' placeholder='Name' />
-							<input type='date' id='releaseDate' placeholder='Release date' />
+							<input type='text' id='movieName' placeholder='Name' required />
+							<input
+								type='date'
+								id='releaseDate'
+								placeholder='Release date'
+								required
+							/>
 							<button onClick={addNewMovie}>Create movie</button>
 						</div>
 					</div>

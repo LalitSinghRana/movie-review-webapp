@@ -22,11 +22,12 @@ const Home: React.FC<{ movies: MovieType[] }> = ({ movies }) => {
 			<div className='movies-container'>
 				{movies
 					.filter((movie: MovieType) => {
-						if (searchTerm === '') return movie;
+						if (searchTerm === '') return true;
 						else if (
 							movie.Name.toLowerCase().includes(searchTerm.toLowerCase())
 						)
-							return movie;
+							return true;
+						return false;
 					})
 					.map((movie: MovieType) => (
 						<div

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./Movie.css";
 import axios from "axios";
@@ -13,13 +13,15 @@ const Home = () => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   let { movieId } = useParams();
 
-  const loadData = async () => {
-    const response = await axios.get(URL + movieId);
-    setMovie(response.data.movieData);
-    setReviews(response.data.reviewData);
-  }
+	useEffect(() => {
+		const loadData = async () => {
+			const response = await axios.get(URL + movieId);
+			setMovie(response.data.movieData);
+			setReviews(response.data.reviewData);
+		};
 
-  useEffect(() => { loadData(); }, []);
+		loadData();
+	}, [movieId]);
 
   return (
 		<div className='movie'>
