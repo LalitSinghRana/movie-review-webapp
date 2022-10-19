@@ -4,9 +4,7 @@ import "./Movie.css";
 import axios from "axios";
 import MovieType from '../../../../server/src/models/Movie';
 import ReviewType from '../../../../server/src/models/Review';
-
-
-const URL = "http://localhost:5000/movie/";
+import { GET_MOVIE_DETAILS_URL } from "../../constants/server-side";
 
 const Home = () => {
   const [movie, setMovie] = useState<MovieType>();
@@ -15,7 +13,8 @@ const Home = () => {
 
 	useEffect(() => {
 		const loadData = async () => {
-			const response = await axios.get(URL + movieId);
+			const url = GET_MOVIE_DETAILS_URL.replace(':movieId', movieId!);
+			const response = await axios.get(url);
 			setMovie(response.data.movieData);
 			setReviews(response.data.reviewData);
 		};

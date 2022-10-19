@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Header.css';
 import MovieType from '../../../../server/src/models/Movie';
 import { useNavigate } from 'react-router-dom';
+import { POST_MOVIE_URL, POST_REVIEW_URL } from '../../constants/server-side';
 
 const Header: React.FC<{ movies: MovieType[] }> = ({ movies }) => {
 	const [movieModal, setMovieModal] = useState(false);
@@ -25,7 +26,7 @@ const Header: React.FC<{ movies: MovieType[] }> = ({ movies }) => {
 			};
 
 			toggleMovieModal();
-			await axios.post('http://localhost:5000/movie/add', tempMovie);
+			await axios.post(POST_MOVIE_URL, tempMovie);
 		}
 	};
 
@@ -65,7 +66,7 @@ const Header: React.FC<{ movies: MovieType[] }> = ({ movies }) => {
 			};
 
 			toggleReviewModal();
-			await axios.post('http://localhost:5000/review/add', tempReview);
+			await axios.post(POST_REVIEW_URL, tempReview);
 		}
 	};
 
