@@ -58,7 +58,7 @@ const Header: React.FC<{ movies: MovieType[] }> = ({ movies }) => {
 			selectMovie.value !== '0'
 		) {
 			let tempReview = {
-				Reviewer_Name: rating.value,
+				Reviewer_Name: reviewerName.value,
 				Rating: rating.value,
 				Review_Comments: reviewComments.value,
 				Movie_Id: selectMovie.value,

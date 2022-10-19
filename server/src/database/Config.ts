@@ -1,14 +1,15 @@
+import config from 'config';
 import { Sequelize } from 'sequelize-typescript';
 import Movie from '../models/Movie';
 import Review from '../models/Review';
+import defaultJson from '../config/default.json';
+import { Dialect } from 'sequelize/types/sequelize';
+
+const DbConfig = config.get<typeof defaultJson.DbConfig>('DbConfig');
 
 const dbConnection = new Sequelize({
-	dialect: 'mysql',
-	host: 'localhost',
-	username: 'root',
-	password: 'root',
-	database: 'movie-review-site',
-	logging: false,
+	...DbConfig,
+	dialect: DbConfig.dialect as Dialect,
 	models: [Movie, Review],
 });
 

@@ -1,0 +1,12 @@
+{
+  "Port": "FORGOT_TO_SET_PORT_IN_CONFIG_FILE",
+  "DbConfig": {
+    "dialect": "mysql",
+    "host": "localhost",
+    "username": "root",
+    "password": "root",
+    "database": "movie-review-site",
+    "logging": false
+  },
+  "AlterSchema": false
+}
