@@ -1,22 +1,21 @@
 import { RequestHandler } from 'express';
-import MovieChannel from '../Channels/MovieChannels';
-import ReviewChannel from '../Channels/ReviewChannel';
+import MovieChannel from '@channels/MovieChannels';
+import ReviewChannel from '@channels/ReviewChannel';
 
 const movieChannelInstance = new MovieChannel();
 const reviewChannelInstance = new ReviewChannel();
 
 export const postReview: RequestHandler = async (req, res) => {
-  try {
+	try {
 		const movieId = parseInt(req.body.Movie_Id, 10);
 		const rating = parseInt(req.body.Rating, 10);
 		const isValidMovieId = await movieChannelInstance.isValidMovieId(movieId);
 		const isValidRating = reviewChannelInstance.isValidRating(rating);
 
-    if (!isValidMovieId || !isValidRating)
-			throw new Error(`Invalid movie id`);
+		if (!isValidMovieId || !isValidRating) throw new Error(`Invalid movie id`);
 
 		let movie = (await movieChannelInstance.getAMovie(movieId))!;
-    
+
 		await reviewChannelInstance.addANewReview(req.body);
 
 		movie.Ratings_Count = movie.Ratings_Count + 1;
@@ -33,7 +32,7 @@ export const postReview: RequestHandler = async (req, res) => {
 };
 
 export const searchInReviews: RequestHandler = async (req, res) => {
-  const searchString = String(req?.body?.searchString);
+	const searchString = String(req?.body?.searchString);
 	let searchResult = await reviewChannelInstance.searchReview(searchString);
 	res.status(200).json(searchResult);
 };

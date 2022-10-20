@@ -1,8 +1,8 @@
 import config from 'config';
 import { Sequelize } from 'sequelize-typescript';
-import Movie from '../models/Movie';
-import Review from '../models/Review';
-import defaultJson from '../config/default.json';
+import Movie from '@models/Movie';
+import Review from '@models/Review';
+import defaultJson from '@config/default.json';
 import { Dialect } from 'sequelize/types/sequelize';
 
 const DbConfig = config.get<typeof defaultJson.DbConfig>('DbConfig');

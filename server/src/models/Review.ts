@@ -5,7 +5,7 @@ import {
 	DataType,
 	ForeignKey,
 } from 'sequelize-typescript';
-import Movie from './Movie';
+import Movie from '@models/Movie';
 
 @Table({
 	timestamps: false,

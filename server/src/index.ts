@@ -5,9 +5,9 @@ import config from 'config';
 import express from 'express';
 import { Request } from 'express';
 import cors from 'cors';
-import dbConnection from './database/Config';
-import movieRoutes from './routes/movie-routes';
-import reviewRoutes from './routes/review-routes';
+import dbConnection from '@database/Config';
+import movieRoutes from '@routes/movie-routes';
+import reviewRoutes from '@routes/review-routes';
 
 const app = express();
 

@@ -1,19 +1,17 @@
-import Review from '../models/Review';
-import Movie from '../models/Movie';
-import { Op } from 'sequelize'
+import Review from '@models/Review';
+import Movie from '@models/Movie';
+import { Op } from 'sequelize';
 
 class ReviewChannel {
-	constructor() {
-		Review;
-	}
+	constructor() {}
 
-	public async getAllReviewsForAMovie(movieId: Movie['Id']) {
+	public getAllReviewsForAMovie = async (movieId: Movie['Id']) => {
 		return await Review.findAll({
 			where: { Movie_Id: movieId },
 		});
 	}
 
-	public async addANewReview(review: Review) {
+	public addANewReview = async (review: Review) => {
 		return await Review.create({
 			Reviewer_Name: review.Reviewer_Name,
 			Rating: review.Rating,
@@ -22,19 +20,19 @@ class ReviewChannel {
 		});
 	}
 
-	public async searchReview(text: string) {
+	public searchReview = async (text: string) => {
 		return await Review.findAll({
 			where: { Review_Comments: { [Op.like]: `%${text}%` } },
 		});
 	}
 
-	public async deleteReviewsForMovie(movieId: Movie['Id']) {
+	public deleteReviewsForMovie = async (movieId: Movie['Id']) => {
 		return await Review.destroy({
 			where: { Movie_Id: movieId },
 		});
 	}
 
-	public isValidRating(rating: Review['Rating']) {
+	public isValidRating = (rating: Review['Rating']) => {
 		if (
 			!isNaN(rating) &&
 			rating >= 0 &&
