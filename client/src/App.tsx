@@ -3,10 +3,10 @@ import { HOME_URL } from './constants/server-side';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
-import Home from './components/home/Home';
-import Movie from './components/movie/Movie';
-import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
+import Home from './components/Home/Home';
+import Movie from './components/Movie/Movie';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import MovieType from '../../server/src/models/Movie';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
 			<div className='App'>
 				<Header movies={movies} />
 				<Routes>
-					<Route path='/' element={<Home movies={movies} />} />
+					<Route path='/' element={<Home movies = {movies} />} />
 					<Route path='movie/:movieId' element={<Movie />} />
 				</Routes>
 				<Footer />
