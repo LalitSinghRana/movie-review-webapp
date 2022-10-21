@@ -46,7 +46,10 @@ export const deleteMovie: RequestHandler = async (req, res) => {
 
 		await reviewChannelInstance.deleteReviewsForMovie(movieId);
 		await movieChannelInstance.deleteMovie(movieId);
-		res.status(200).json({ message: `Deleted movie and it's related reviews` });
+
+		res.status(200).json({
+			message: `Deleted movie(movieId : ${movieId}) and all it's reviews`,
+		});
 	} catch (err: unknown) {
 		console.error(err);
 		res.status(404).json({ message: `Invalid movie id` });

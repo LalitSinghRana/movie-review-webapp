@@ -26,7 +26,7 @@ function App() {
 			<div className='App'>
 				<Header movies={movies} />
 				<Routes>
-					<Route path='/' element={<Home movies = {movies} />} />
+					<Route path='/' element={<Home movies={movies} />} />
 					<Route path='movie/:movieId' element={<Movie />} />
 				</Routes>
 				<Footer />
