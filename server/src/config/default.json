@@ -1,5 +1,5 @@
 {
-  "Port": "FORGOT_TO_SET_PORT_IN_CONFIG_FILE",
+  "Port": -5050,
   "DbConfig": {
     "dialect": "mysql",
     "host": "localhost",
